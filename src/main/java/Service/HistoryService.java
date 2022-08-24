@@ -1,7 +1,6 @@
 package Service;
 
 import Domain.History;
-import Domain.Wifi;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,10 +89,11 @@ public class HistoryService {
             connection = DriverManager.getConnection(url, dbuserId, dbPassword);
 
             String sql = " insert into history(`아이디`,`X좌표`,`Y좌표`, `작업일자`) " +
-                    " values(?,?,now()) ";
+                    " values(?,?,?,now()) ";
             preparestatement = connection.prepareStatement(sql);
-            preparestatement.setDouble(1,x);
-            preparestatement.setDouble(2,y);
+            preparestatement.setInt(1, getNextidx());
+            preparestatement.setDouble(2,x);
+            preparestatement.setDouble(3,y);
             // 3. 쿼리 실행
             int affected_row = preparestatement.executeUpdate();
             if( affected_row >0) {
@@ -131,10 +131,11 @@ public class HistoryService {
             }
         }
     }
-    public void withdraw(double x, double y) {
+    public int withdraw(String id) {
         String url = "jdbc:mariadb://127.0.0.1:3306/wifitest";
         String dbuserId = "wifiuser";
         String dbPassword = "wifi";
+        int affected_row =0;
         // 1. 드라이버로드
         try {
             Class.forName("org.mariadb.jdbc.Driver");
@@ -148,14 +149,11 @@ public class HistoryService {
         //2. 커넥션 객체 생성
         try {
             connection = DriverManager.getConnection(url, dbuserId, dbPassword);
-
-            String sql = " delete from history where (`X좌표`) = ? and (`Y좌표`) = ? ";
+            String sql = " delete from history where (`아이디`) =? ";
             preparestatement = connection.prepareStatement(sql);
-            preparestatement.setDouble(1,x);
-            preparestatement.setDouble(2, y);
-
+            preparestatement.setString(1, id.trim());
             // 3. 쿼리 실행
-            int affected_row = preparestatement.executeUpdate();
+            affected_row = preparestatement.executeUpdate();
             if( affected_row >0) {
                 System.out.println("탈퇴 성공");
             }else {
@@ -190,5 +188,61 @@ public class HistoryService {
                 e.printStackTrace();
             }
         }
+        return affected_row;
+    }
+    public int getNextidx(){
+        String url = "jdbc:mariadb://127.0.0.1:3306/wifitest";
+        String dbuserId = "wifiuser";
+        String dbPassword = "wifi";
+        // 1. 드라이버로드
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+        }catch(ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection connection = null;
+        PreparedStatement preparestatement = null;
+        ResultSet rs = null;
+        try {
+            connection = DriverManager.getConnection(url, dbuserId, dbPassword);
+            String sql = " select `아이디` " +
+                    " from history " +
+                    " order by `아이디` desc ";
+            preparestatement = connection.prepareStatement(sql);
+            rs = preparestatement.executeQuery();
+            while(rs.next()){
+                return rs.getInt(1) +1;
+            }
+            return 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally{
+            try {
+                if(rs != null && !rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                if(preparestatement != null &&!preparestatement.isClosed()) {
+                    preparestatement.close();
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            try {
+                if(connection != null && !connection.isClosed()) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+
     }
 }

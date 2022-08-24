@@ -6,8 +6,8 @@ import Service.WifiService;
 
 public class CRUDTest {
     public static void main(String[] args) throws Exception{
-        WifiService ws = new WifiService();
-        long cnt = ws.WifiMain();
-        System.out.println(cnt);
+        HistoryService hs = new HistoryService();
+        hs.register(1.0001,1.0001);
+        //hs.withdraw("1");
     }
 }

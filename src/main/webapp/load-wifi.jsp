@@ -11,6 +11,11 @@
             font-size: 200%;
             text-align: center;
         }
+        a{
+            font-size: 100%;
+            text-align: center;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>

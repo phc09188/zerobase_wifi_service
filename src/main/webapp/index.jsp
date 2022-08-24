@@ -40,7 +40,6 @@
         .wifi_info_table {
             width: 100%;
             border: 1px solid gray;
-            border-collapse: collapse;
             background-color: #3fc83f;
             text-align: center;
             color: white;
