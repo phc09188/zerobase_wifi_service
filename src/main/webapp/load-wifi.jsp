@@ -6,9 +6,15 @@
 <html>
 <head>
     <title>와이파이로드</title>
+    <style type = "text/css">
+        .result{
+            font-size: 200%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<p>
+<p class = "result">
     <%=wifiService.WifiMain()%>
     개의 정보를 저장하였습니다.
 </p>

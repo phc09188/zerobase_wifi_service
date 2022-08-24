@@ -1,9 +1,14 @@
 package Domain;
+
+
 import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class History{
     int ID;
-    String Posx;
-    String Posy;
+    Double Posx;
+    Double Posy;
     String curDate;
 }
