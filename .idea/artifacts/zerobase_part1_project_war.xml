@@ -9,13 +9,6 @@
     </properties>
     <root id="archive" name="zerobase_part1_project-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="zerobase_part1_project:war exploded" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="mariadb-java-client-3.0.7" />
-          <element id="library" level="project" name="json_simple-1.1" />
-          <element id="library" level="project" name="lombok" />
-        </element>
-      </element>
     </root>
   </artifact>
 </component>

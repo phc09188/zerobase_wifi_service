@@ -1,7 +1,7 @@
 package Domain;
 
-import lombok.*;
 
+import lombok.*;
 
 @Getter
 @Setter

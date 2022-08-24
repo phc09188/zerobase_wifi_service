@@ -22,7 +22,7 @@ public class WifiService {
         long allcnt = 0;
         WifiTable wifitable = new WifiTable();
         List<Wifi> list = new ArrayList<>();
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 1; i++) {
             JSONObject json = (JSONObject) jsonParser.parse(readUrl(i));
             JSONObject TbPublicWifiInfo = (JSONObject) json.get("TbPublicWifiInfo");
             allcnt = (long) TbPublicWifiInfo.get("list_total_count");
