@@ -57,8 +57,8 @@
     <h1>와이파이 정보 구하기</h1>
     <nav class = "link menu">
         <a href ="/"> 홈</a> |
-        <a href ="history.jsp"> 위치 히스토리 목록</a>|
-        <a href ="/load_wifi.jsp">Open API 와이파이 정보 요청 및 저장</a>
+        <a href ="/history.jsp"> 위치 히스토리 목록</a>|
+        <a href ="/load-wifi.jsp">Open API 와이파이 정보 요청 및 저장</a>
     </nav>
     <form class="location_form" action="/location" method="POST">
         <label for="y-pos">LAT:</label>
@@ -100,7 +100,38 @@
 
     </tbody>
 </table>
+<script type="text/javascript">
+    class WifiServiceController{
+        constructor() {
+            this.location = document.querySelector(".location_form");
+            this.locationButton = document.querySelector("#locationButton");
+            this.num = 0;
+            this.wifiLoadcnt = 20;
+        }
+        initWifiServiceFormController() {
+            this.initLocationHistoryButton();
+        }
 
+        initLocationHistoryButton() {
+            const locationButton = this.locationButton;
+            locationButton.addEventListener("click", () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        this.location["x-pos"].value = position.coords.longitude;
+                        this.location["y-pos"].value = position.coords.latitude;
+                    })
+                } else {
+                    alert('위치 권한을 설정해 주세요.');
+                }
+            });
+        }
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+        const wifiServiceController = new WifiServiceController();
+        wifiServiceController.initWifiServiceFormController();
+    });
+
+</script>
 </body>
 
 </html>

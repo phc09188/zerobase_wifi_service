@@ -12,6 +12,9 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="zerobase_part1_project" />
+          <element id="library" level="project" name="json_simple-1.1" />
+          <element id="library" level="project" name="mariadb-java-client-3.0.7" />
+          <element id="library" level="project" name="lombok" />
         </element>
       </element>
       <element id="directory" name="META-INF">
