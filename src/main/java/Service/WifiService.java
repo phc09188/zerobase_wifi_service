@@ -22,13 +22,21 @@ public class WifiService {
         long allcnt = 0;
         WifiTable wifitable = new WifiTable();
         List<Wifi> list = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
+
+        JSONObject inputjson = (JSONObject) jsonParser.parse(readUrl(0));
+        JSONObject TbPublicWifiInfo = (JSONObject) inputjson.get("TbPublicWifiInfo");
+        allcnt = (long) TbPublicWifiInfo.get("list_total_count");
+        int count = (int) (allcnt/1000);
+        if(allcnt/1000 != 0){
+            count++;
+        }
+        for (int i = 0; i < count; i++) {
             JSONObject json = (JSONObject) jsonParser.parse(readUrl(i));
-            JSONObject TbPublicWifiInfo = (JSONObject) json.get("TbPublicWifiInfo");
-            allcnt = (long) TbPublicWifiInfo.get("list_total_count");
+            TbPublicWifiInfo = (JSONObject) json.get("TbPublicWifiInfo");
             JSONArray jsonlist = (JSONArray) TbPublicWifiInfo.get("row");
             for (int j = 0; j < jsonlist.size(); j++) {
                 JSONObject a = (JSONObject) jsonlist.get(j);
+
                 Wifi wifi = new Wifi();
                 wifi.setAdminNumber(String.valueOf(a.get("X_SWIFI_MGR_NO")));
                 wifi.setBorough(String.valueOf(a.get("X_SWIFI_WRDOFC")));

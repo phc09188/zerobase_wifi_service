@@ -61,7 +61,7 @@
 </nav>
 <table class = "wifi-history-info-table">
     <thread>
-        <tr class = "wifi-history-info-table header">
+        <tr class = "header">
             <th>ID</th>
             <th>X좌표</th>
             <th>Y좌표</th>
