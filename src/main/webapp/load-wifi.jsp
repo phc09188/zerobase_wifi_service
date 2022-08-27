@@ -11,7 +11,7 @@
             font-size: 200%;
             text-align: center;
         }
-        a{
+        .tag{
             font-size: 100%;
             text-align: center;
             text-decoration: none;
@@ -23,7 +23,8 @@
     <%=wifiService.WifiMain()%>
     개의 정보를 저장하였습니다.
 </p>
-<a href="/">홈으로 가기</a>
-
+<div class = "tag">
+    <a href="/">홈으로 가기</a>
+</div>
 </body>
 </html>

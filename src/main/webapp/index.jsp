@@ -1,7 +1,7 @@
 <%@ page import="Domain.Wifi" %>
 <%@ page import="java.util.List" %>
 <%@ page import="DB.WifiTable" %>
-<%@ page import="Service.HistoryService" %>
+<%@ page import="DB.HistoryTable" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     WifiTable wifi = new WifiTable();
@@ -22,25 +22,9 @@
             min-height: 100%;
             font-family: '나눔 고딕', NanumGothic, '돋움', Dotum, sans-serif;
         }
-        ul,
-        ol,
-        li {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
         a {
             text-decoration: none;
             color: #000;
-        }
-        .menu {
-            width: fit-content;
-            padding: 10px;
-            border: 1px solid rgba(94, 84, 84, 0.28);
-            margin-bottom: 20px;
-        }
-        .menu ul li {
-            margin-top: 5px;
         }
         .location_form {
             width: fit-content;
@@ -130,7 +114,7 @@
         <%
         } else {
             List<Wifi> wifiList = wifi.NearByWifi(Double.parseDouble(lat_value), Double.parseDouble(lnt_value));
-            HistoryService history = new HistoryService();
+            HistoryTable history = new HistoryTable();
             history.register(Double.parseDouble(lat_value), Double.parseDouble(lnt_value));
             for (int i = 0; i < wifiList.size(); i++) {
                 Wifi wifi_idx = wifiList.get(i);
@@ -161,6 +145,7 @@
     </tbody>
 </table>
 <script type="text/javascript">
+    // gps 내 정보 가져오기
     class WifiServiceController{
         constructor() {
             this.location = document.querySelector(".location_form");

@@ -1,9 +1,9 @@
-<%@ page import="Service.HistoryService" %>
+<%@ page import="DB.HistoryTable" %>
 <%@ page import="Domain.History" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    HistoryService history = new HistoryService();
+    HistoryTable history = new HistoryTable();
     List<History> historyList = history.Historylist();
 %>
 <html>

@@ -1,11 +1,11 @@
-package Service;
+package DB;
 
 import Domain.History;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryService {
+public class HistoryTable {
     public List<History> Historylist() {
         List<History> wifihistory = new ArrayList<>();
         String url = "jdbc:mariadb://127.0.0.1:3306/wifitest";

@@ -1,6 +1,6 @@
 package com.example.zerobase_part1_project;
 
-import Service.HistoryService;
+import DB.HistoryTable;
 
 
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class HistoryDeleteServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HistoryService wifiHistory = new HistoryService();
+        HistoryTable wifiHistory = new HistoryTable();
         String input = req.getParameter("id");
         int affected = wifiHistory.withdraw(input);
         String message = "삭제되지 않았습니다.";
